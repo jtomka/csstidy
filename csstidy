@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# remove EOLs
+# remove comments
+# lowercase
+# remove extra spaces
+# add EOLs after [,:}]
+# add space before and EOL after `{'
+# add space after `:'
+# remove empty lines
+# add indentation
+
+tr -d '\n' | perl -pe 's/[\/][\*].*?[\*][\/]//g' | tr 'A-Z' 'a-z' | sed -e 's/[[:space:]]\+/ /g' | sed -e 's/\([[:space:]]*[,;][[:space:]]*\)/\1\n/g' | sed -e 's/\([[:space:]]*[}][[:space:]]*\)/\n\1\n/g' | sed -e 's/\([[:space:]]*[{][[:space:]]*\)/ \1\n/g' | sed -e 's/\([[:space:]]*[:][[:space:]]*\)/: /g' |sed -e 's/^[[:space:]]\+//' |sed -e 's/[[:space:]]*$//' |sed -e '/^[[:space:]]*$/d' |sed -e 's/^\(.*[^{},]\)$/    \1/'
